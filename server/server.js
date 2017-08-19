@@ -2,12 +2,51 @@
 /* eslint no-magic-numbers: [0]*/
 /* eslint no-negated-condition: [0]*/
 /* eslint no-process-env: [0]*/
+/* eslint no-process-exit: [0]*/
 /* eslint no-console: [0]*/
+/* eslint no-sync: [0]*/
 import bodyParser from "body-parser";
+import commandExists from "command-exists";
 import dotenv from "dotenv";
 import express from "express";
+import fs from "fs";
 
 dotenv.config({"path": "../.env"});
+
+const {
+    "JAVA_COMMAND": javaCommand,
+    "GIT_COMMAND": gitCommand,
+    "CODE_MAAT_JAR_FILE": codeMaatJarFile,
+    "PROJECT_DIR": projectDir
+} = process.env;
+
+if (!commandExists.sync(javaCommand)) {
+    console.error(`Java command(JAVA_COMMAND) does not exist:
+ ${javaCommand}`);
+    process.exit(1);
+}
+
+if (!commandExists.sync(gitCommand)) {
+    console.error(`Git command(GIT_COMMAND) does not exist:
+ ${gitCommand}`);
+    process.exit(1);
+}
+
+if (!fs.existsSync(codeMaatJarFile)) {
+    console.error(`Code Maat file(CODE_MAAT_JAR_FILE)
+ does not exist: ${codeMaatJarFile}`);
+    process.exit(1);
+}
+
+if (!fs.existsSync(projectDir)) {
+    console.error(`Project repo/directory(PROJECT_DIR)
+ does not exist: ${codeMaatJarFile}`);
+    process.exit(1);
+}
+
+console.log("Using these settings:");
+console.log(process.env);
+
 
 const app = express();
 app.use(bodyParser.json());

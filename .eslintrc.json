@@ -208,8 +208,8 @@
             {
                 "newlines-between": "always",
                 "groups": [
-                    "builtin",
                     [
+                        "builtin",
                         "internal",
                         "external"
                     ],
