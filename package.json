@@ -25,6 +25,14 @@
     "pre-commit": "^1.2.2"
   },
   "lint-staged": {
+    "client/**/*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "server/**/*.js": [
+      "eslint --fix",
+      "git add"
+    ],
     "*.json": [
       "jsonlint -i",
       "git add"

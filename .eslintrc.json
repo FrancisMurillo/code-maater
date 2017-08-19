@@ -25,202 +25,203 @@
     "react",
     "import"
   ],
-  "rules": {
-    "indent": [
-      "error",
-      4
-    ],
-    "linebreak-style": [
-      "error",
-      "unix"
-    ],
-    "quotes": 1,
-    "semi": [
-      "error",
-      "always"
-    ],
-    "space-before-function-paren": [
-      "error",
-      {
-        "anonymous": "never",
-        "named": "never",
-        "asyncArrow": "never"
-      }
-    ],
-    "no-magic-numbers": [
-      1,
-      {
-        "ignore": [
-          -1,
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          10,
-          14,
-          30,
-          60,
-          200,
-          300,
-          400,
-          403,
-          422,
-          500,
-          2017,
-          5000,
-          0.75
-        ]
-      }
-    ],
-    "capitalized-comments": 0,
-    "no-inline-comments": 0,
-    "line-comment-position": 0,
-    "dot-location": [
-      0,
-      "property"
-    ],
-    "arrow-body-style": 0,
-    "no-confusing-arrow": 0,
-    "padded-blocks": [
-      2,
-      "never"
-    ],
-    "one-var": 0,
-    "sort-imports": 0,
-    "sort-keys": 0,
-    "no-debugger": 2,
-    "no-console": 2,
-    "no-unused-vars": [
-      1,
-      {
-        "argsIgnorePattern": "^_",
-        "varsIgnorePattern": "^_"
-      }
-    ],
-    "no-empty-pattern": 1,
-    "no-else-return": 0,
-    "no-extra-parens": [
-      0,
-      "all",
-      {
-        "ignoreJSX": "multi-line"
-      }
-    ],
-    "object-curly-spacing": [
-      2,
-      "never"
-    ],
-    "prefer-promise-reject-errors": 0,
-    "prefer-destructuring": 0,
-    "id-length": 0,
-    "no-ternary": 0,
-    "multiline-ternary": 0,
-    "sort-vars": 0,
-    "quote-props": 1,
-    "react/display-name": 0,
-    "react/jsx-sort-props": 0,
-    "react/jsx-indent": 1,
-    "react/jsx-indent-props": 1,
-    "react/sort-prop-types": 0,
-    "react/require-default-props": 0,
-    "react/forbid-prop-types": 0,
-    "react/jsx-no-bind": 0,
-    "react/prop-types": 0,
-    "react/no-multi-comp": 0,
-    "react/jsx-filename-extension": 0,
-    "new-cap": 0,
-    "import/default": 1,
-    "react/forbid-component-props": 0,
-    "class-methods-use-this": 1,
-    "react/require-optimization": 0,
-    "max-len": [
-      2,
-      {
-        "ignoreStrings": true
-      }
-    ],
-    "func-style": 0,
-    "generator-star-spacing": 0,
-    "require-jsdoc": 0,
-    "operator-linebreak": 0,
-    "no-warning-comments": 1,
-      "max-statements": 0,
-      "max-params": 0,
-    "import/order": [
-      2,
-      {
-        "newlines-between": "always",
-        "groups": [
-          "builtin",
-          [
-            "internal",
-            "external"
-          ],
-          "parent",
-          "sibling"
-        ]
-      }
-    ],
-    "import/newline-after-import": [
-      2,
-      {
-        "count": 1
-      }
-    ],
-    "import/no-absolute-path": 2,
-    "array-bracket-newline": [
-      2,
-      {
-        "multiline": true,
-        "minItems": 4
-      }
-    ],
-    "array-element-newline": [
-      0,
-      {
-        "multiline": true,
-        "minItems": 4
-      }
-    ],
-    "object-curly-newline": [
-      2,
-      {
-        "multiline": true,
-        "minProperties": 4
-      }
-    ],
-    "padding-line-between-statements": [
-      2,
-      {
-        "blankLine": "always",
-        "next": "function",
-        "prev": "*"
-      },
-      {
-        "blankLine": "always",
-        "next": "return",
-        "prev": "*"
-      },
-      {
-        "blankLine": "always",
-        "next": "*",
-        "prev": "if"
-      },
-      {
-        "blankLine": "never",
-        "next": "if",
-        "prev": "break"
-      }
-    ],
-    "no-underscore-dangle": 0,
-    "no-constant-condition": [
-      2,
-      {
-        "checkLoops": false
-      }
-    ],
-    "react/jsx-handler-names": 0
-  }
+    "rules": {
+        "indent": [
+            "error",
+            4
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": 1,
+        "semi": [
+            "error",
+            "always"
+        ],
+        "space-before-function-paren": [
+            "error",
+            {
+                "anonymous": "never",
+                "named": "never",
+                "asyncArrow": "never"
+            }
+        ],
+        "no-magic-numbers": [
+            1,
+            {
+                "ignore": [
+                    -1,
+                    0,
+                    1
+                ]
+            }
+        ],
+        "max-len": [
+            2,
+            {
+                "ignoreStrings": true
+            }
+        ],
+
+        "capitalized-comments": 0,
+        "no-inline-comments": 0,
+        "line-comment-position": 0,
+        "no-warning-comments": 1,
+
+        "require-jsdoc": 0,
+
+        "no-debugger": 2,
+        "no-console": 2,
+
+        "sort-imports": 2,
+
+        "no-underscore-dangle": 0,
+        "no-unused-vars": [
+            1,
+            {
+                "argsIgnorePattern": "^_",
+                "varsIgnorePattern": "^_"
+            }
+        ],
+        "one-var": 0,
+        "sort-vars": 0,
+        "id-length": 0,
+
+        "dot-location": [
+            0,
+            "property"
+        ],
+        "sort-keys": 0,
+        "quote-props": 1,
+
+        "arrow-body-style": 0,
+        "no-confusing-arrow": 0,
+
+        "no-empty-pattern": 1,
+        "prefer-destructuring": 0,
+
+        "no-ternary": 0,
+        "multiline-ternary": 0,
+        "operator-linebreak": 0,
+
+        "no-else-return": 0,
+
+        "prefer-promise-reject-errors": 0,
+
+        "func-style": 0,
+        "max-params": 0,
+        "max-statements": 0,
+
+        "no-constant-condition": [
+            2,
+            {
+                "checkLoops": false
+            }
+        ],
+        "no-extra-parens": [
+            0,
+            "all",
+            {
+                "ignoreJSX": "multi-line"
+            }
+        ],
+
+        "padding-line-between-statements": [
+            2,
+            {
+                "blankLine": "always",
+                "next": "function",
+                "prev": "*"
+            },
+            {
+                "blankLine": "always",
+                "next": "return",
+                "prev": "*"
+            },
+            {
+                "blankLine": "always",
+                "next": "*",
+                "prev": "if"
+            },
+            {
+                "blankLine": "never",
+                "next": "if",
+                "prev": "break"
+            }
+        ],
+        "padded-blocks": [
+            2,
+            "never"
+        ],
+        "object-curly-spacing": [
+            2,
+            "never"
+        ],
+        "object-curly-newline": [
+            2,
+            {
+                "multiline": true,
+                "minProperties": 4
+            }
+        ],
+        "array-bracket-newline": [
+            2,
+            {
+                "multiline": true,
+                "minItems": 4
+            }
+        ],
+        "array-element-newline": [
+            0,
+            {
+                "multiline": true,
+                "minItems": 4
+            }
+        ],
+
+        "generator-star-spacing": 0,
+
+        "class-methods-use-this": 1,
+        "new-cap": 0,
+
+        "react/display-name": 0,
+        "react/jsx-handler-names": 0,
+        "react/jsx-filename-extension": 0,
+        "react/jsx-indent": 1,
+        "react/jsx-indent-props": 1,
+        "react/require-default-props": 0,
+        "react/forbid-component-props": 0,
+        "react/jsx-sort-props": 0,
+        "react/prop-types": 0,
+        "react/forbid-prop-types": 0,
+        "react/sort-prop-types": 0,
+        "react/jsx-no-bind": 0,
+        "react/no-multi-comp": 0,
+        "react/require-optimization": 0,
+
+        "import/default": 1,
+        "import/order": [
+            2,
+            {
+                "newlines-between": "always",
+                "groups": [
+                    "builtin",
+                    [
+                        "internal",
+                        "external"
+                    ],
+                    "parent",
+                    "sibling"
+                ]
+            }
+        ],
+        "import/newline-after-import": [
+            2,
+            {
+                "count": 1
+            }
+        ],
+        "import/no-absolute-path": 2
+    }
 }
