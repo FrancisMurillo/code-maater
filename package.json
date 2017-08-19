@@ -1,35 +1,38 @@
 {
-    "name": "code-maater",
-    "version": "1.0.0",
-    "main": "index.js",
-    "repository": "https://github.com/FrancisMurillo/code-maater.git",
-    "author": "Francis Murillo <francisavmurillo@gmail.com>",
-    "license": "MIT",
-    "dependencies": {
-        "concurrently": "^3.5.0"
-    },
-    "scripts": {
-        "install": "(cd client && npm install) && (cd server && npm install)",
-        "start": "concurrently \"cd client && PORT=23000 npm start\" \"cd server && PORT=23001 npm start\"",
-        "lint-staged": "lint-staged",
-        "precommit": "lint-staged"
-    },
-    "devDependencies": {
-        "babel-eslint": "^7.2.3",
-        "eslint": "^4.5.0",
-        "jsonlint": "^1.6.2",
-        "lint-staged": "^4.0.3",
-        "pre-commit": "^1.2.2"
-    },
-    "lint-staged": {
-        "*.json": [
-            "jsonlint -i",
-            "git add"
-        ],
-        "verbose": true
-    },
-    "pre-commit": [
-        "lint-staged",
-        "test"
-    ]
+  "name": "code-maater",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/FrancisMurillo/code-maater.git",
+  "author": "Francis Murillo <francisavmurillo@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^3.5.0"
+  },
+  "scripts": {
+    "install": "(cd client && npm install) && (cd server && npm install)",
+    "start": "concurrently \"cd client && PORT=23000 npm start\" \"cd server && PORT=23001 npm start\"",
+    "eslint": "eslint",
+    "lint-staged": "lint-staged",
+    "precommit": "lint-staged"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "^4.5.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-react": "^7.2.1",
+    "jsonlint": "^1.6.2",
+    "lint-staged": "^4.0.3",
+    "pre-commit": "^1.2.2"
+  },
+  "lint-staged": {
+    "*.json": [
+      "jsonlint -i",
+      "git add"
+    ],
+    "verbose": true
+  },
+  "pre-commit": [
+    "lint-staged",
+    "test"
+  ]
 }
