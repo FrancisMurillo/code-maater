@@ -18,12 +18,13 @@
     "sourceType": "module"
   },
   "globals": {
-    "react": true,
+      "react": true,
+      "process": true,
     "__DEV__": true
   },
   "plugins": [
     "react",
-    "import"
+      "import"
   ],
     "rules": {
         "indent": [
