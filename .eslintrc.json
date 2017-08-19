@@ -7,7 +7,7 @@
   "extends": [
     "eslint:all",
     "plugin:react/all",
-    "plugin:import/errors"
+      "plugin:import/errors"
   ],
   "parser": "babel-eslint",
   "parserOptions": {
@@ -24,7 +24,8 @@
   },
   "plugins": [
     "react",
-      "import"
+      "import",
+      "sort-imports-es6-autofix"
   ],
     "rules": {
         "indent": [
@@ -75,7 +76,7 @@
         "no-debugger": 2,
         "no-console": 2,
 
-        "sort-imports": 2,
+        "sort-imports": 0,
 
         "no-underscore-dangle": 0,
         "no-unused-vars": [
@@ -223,6 +224,12 @@
                 "count": 1
             }
         ],
-        "import/no-absolute-path": 2
+        "import/no-absolute-path": 2,
+
+        "sort-imports-es6-autofix/sort-imports-es6": [2, {
+            "ignoreCase": false,
+            "ignoreMemberSort": false,
+            "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
+        }]
     }
 }

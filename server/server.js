@@ -4,7 +4,10 @@
 /* eslint no-process-env: [0]*/
 /* eslint no-console: [0]*/
 import bodyParser from "body-parser";
+import dotenv from "dotenv";
 import express from "express";
+
+dotenv.config({"path": "../.env"});
 
 const app = express();
 app.use(bodyParser.json());
