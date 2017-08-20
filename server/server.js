@@ -116,12 +116,19 @@ const toCamelCase = (text) =>
         /-([a-z])/g,
         (match) => match[1].toUpperCase());
 
-router.get("/", (req, res) => {
+router.get("/", (_req, res) => {
     res.send({
         minDate,
         maxDate
     });
 });
+
+router.delete("/code-maat", (_req, res) => {
+    analysisCache.clear();
+
+    res.send({"message": "Cache cleared"});
+});
+
 
 router.get("/code-maat", (req, res) => {
     const {
