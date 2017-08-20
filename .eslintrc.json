@@ -62,7 +62,8 @@
         "max-len": [
             2,
             {
-                "ignoreStrings": true
+                "ignoreStrings": true,
+                "ignoreTemplateLiterals": true
             }
         ],
 

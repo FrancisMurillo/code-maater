@@ -6,6 +6,7 @@
 /* eslint no-console: [0]*/
 /* eslint no-sync: [0]*/
 import bodyParser from "body-parser";
+import cache from "memory-cache";
 import dotenv from "dotenv";
 import express from "express";
 import fs from "fs";
@@ -52,32 +53,35 @@ console.log(`Project directory: ${projectDir}`);
 
 const logDirName = ".logs";
 const logDir = path.join(projectDir, logDirName);
+shell.rm("-rf", logDir);
 shell.mkdir("-p", logDir);
 console.log("Created log directory");
+
+const shellOptions = {
+    "cwd": projectDir,
+    "silent": true
+};
 
 const commitFileName = ".commits";
 const commitFile = path.join(logDir, commitFileName);
 
-let commitData = "";
-shell.exec(
+const commitOutput = shell.exec(
     `${gitCommand} log --format=%cI,%H`,
-    {"cwd": projectDir},
-    (code, stdout, _stderr) => {
-        if (code > 0) {
-            console.error("Could not get commit data");
-            process.exit(1);
-        } else {
-            commitData = stdout
-                .split("\n")
-                .map((line) => line.split(","))
-                .map(([date, hash]) => ({
-                    date,
-                    hash
-                }));
-        }
-    });
+    shellOptions).stdout;
+
+fs.writeFileSync(commitFile, commitOutput);
+const commitData = commitOutput
+    .split("\n")
+    .map((line) => line.split(","))
+    .map(([date, hash]) => ({
+        date,
+        hash
+    }));
 
 console.log("Acquired commit data");
+
+
+const analysisCache = new cache.Cache();
 
 const app = express();
 app.use(bodyParser.json());
@@ -102,6 +106,11 @@ const analysisValues = {
 const isAnalysisValue =
       (value) => analysisValues.hasOwnProperty(value);
 
+const toCamelCase = (text) =>
+    text.replace(
+        /-([a-z])/g,
+        (match) => match[1].toUpperCase());
+
 router.get("/code-maat", (req, res) => {
     const {
         "start_date": startDate,
@@ -124,7 +133,53 @@ router.get("/code-maat", (req, res) => {
             .send(`Analysis(analysis) is not a valid analysis type:
  ${analysis}`);
     } else {
-        res.json("Oka");
+        const cacheKey = [analysis, startDate, endDate].join("|");
+        const cachedValue = analysisCache.get(cacheKey);
+
+        if (cachedValue) {
+            res.send(cachedValue);
+        } else {
+            const logFileName = `log--${startDate}--${endDate}`;
+            const logFile = path.join(logDir, `${logFileName}.log`);
+
+            if (!shell.test("-f", logFile)) {
+                const logOutput = shell.exec(
+                    `${gitCommand} log --pretty=format:'[%h] %aN %ad %s' --date=short --numstat --after=${startDate} --before=${endDate}`,
+                    shellOptions).stdout;
+
+                fs.writeFileSync(logFile, logOutput);
+            }
+
+            const analysisFileName = `${logFileName}--${analysis}`;
+            const analysisFile = path.join(logDir, `${analysisFileName}.csv`);
+
+            if (!fs.existsSync(analysisFile)) {
+                const analysisOutput = shell.exec(
+                    `${javaCommand} -jar ${codeMaatJarFile} -l ${logFile} -c git -a ${analysis}`,
+                    shellOptions).stdout;
+
+                fs.writeFileSync(analysisFile, analysisOutput);
+            }
+
+            const analysisData = fs.readFileSync(analysisFile, "utf-8");
+
+            const [baseHeaders, ...baseData] = analysisData.split("\n");
+            const headers = baseHeaders.split(",").map(toCamelCase);
+            const records = baseData.map((row) => {
+                const record = Object.create(null);
+
+                const fields = row.split(",");
+
+                headers.forEach((header, index) => {
+                    record[header] = fields[index];
+                });
+
+                return record;
+            });
+
+            analysisCache.put(cacheKey, records);
+            res.send(records);
+        }
     }
 });
 
