@@ -10,6 +10,7 @@ import cache from "memory-cache";
 import dotenv from "dotenv";
 import express from "express";
 import fs from "fs";
+import moment from "moment";
 import path from "path";
 import shell from "shelljs";
 
@@ -67,7 +68,7 @@ const commitFile = path.join(logDir, commitFileName);
 
 const commitOutput = shell.exec(
     `${gitCommand} log --format=%cI,%H`,
-    shellOptions).stdout;
+    shellOptions).stdout.trim();
 
 fs.writeFileSync(commitFile, commitOutput);
 const commitData = commitOutput
@@ -78,8 +79,12 @@ const commitData = commitOutput
         hash
     }));
 
-console.log("Acquired commit data");
+const formatDate = (text) => text.split("T")[0];
 
+const minDate = formatDate(commitData[commitData.length - 1].date);
+const maxDate = formatDate(commitData[0].date);
+
+console.log("Acquired commit data");
 
 const analysisCache = new cache.Cache();
 
@@ -111,6 +116,13 @@ const toCamelCase = (text) =>
         /-([a-z])/g,
         (match) => match[1].toUpperCase());
 
+router.get("/", (req, res) => {
+    res.send({
+        minDate,
+        maxDate
+    });
+});
+
 router.get("/code-maat", (req, res) => {
     const {
         "start_date": startDate,
@@ -124,6 +136,14 @@ router.get("/code-maat", (req, res) => {
     } else if (!isDateValue(endDate)) {
         res.status(422)
             .send(`End Date(end_date) is a required date: ${endDate}`);
+    } else if (startDate < minDate) {
+        res.status(422)
+            .send(`Start Date is less than Min Date:
+ ${startDate} < ${minDate}`);
+    } else if (endDate > maxDate) {
+        res.status(422)
+            .send(`End Date is greater than Max Date:
+ ${endDate} > ${maxDate}`);
     } else if (endDate < startDate) {
         res.status(422)
             .send(`Start Date is greater than End Date:
@@ -145,7 +165,7 @@ router.get("/code-maat", (req, res) => {
             if (!shell.test("-f", logFile)) {
                 const logOutput = shell.exec(
                     `${gitCommand} log --pretty=format:'[%h] %aN %ad %s' --date=short --numstat --after=${startDate} --before=${endDate}`,
-                    shellOptions).stdout;
+                    shellOptions).stdout.trim();
 
                 fs.writeFileSync(logFile, logOutput);
             }
@@ -156,7 +176,7 @@ router.get("/code-maat", (req, res) => {
             if (!fs.existsSync(analysisFile)) {
                 const analysisOutput = shell.exec(
                     `${javaCommand} -jar ${codeMaatJarFile} -l ${logFile} -c git -a ${analysis}`,
-                    shellOptions).stdout;
+                    shellOptions).stdout.trim();
 
                 fs.writeFileSync(analysisFile, analysisOutput);
             }
