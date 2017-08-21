@@ -1,4 +1,8 @@
 import {combineReducers} from "redux";
 
-export default combineReducers({
-});
+import {
+    internalizationReducer
+} from "./app";
+
+
+export default combineReducers({"intl": internalizationReducer});

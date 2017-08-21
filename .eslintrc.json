@@ -7,7 +7,7 @@
   "extends": [
     "eslint:all",
     "plugin:react/all",
-      "plugin:import/errors"
+    "plugin:import/errors"
   ],
   "parser": "babel-eslint",
   "parserOptions": {
@@ -24,8 +24,8 @@
   },
   "plugins": [
     "react",
-      "import",
-      "sort-imports-es6-autofix"
+    "import",
+    "import-order-autofix"
   ],
     "rules": {
         "indent": [
@@ -227,10 +227,13 @@
         ],
         "import/no-absolute-path": 2,
 
-        "sort-imports-es6-autofix/sort-imports-es6": [2, {
-            "ignoreCase": false,
-            "ignoreMemberSort": false,
-            "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
+        "import-order-autofix/order": [2, {
+            "groups": [
+                ["builtin", "internal", "external"],
+                ["sibling", "parent"],
+                "index"
+            ],
+            "newlines-between": "always"
         }]
     }
 }
