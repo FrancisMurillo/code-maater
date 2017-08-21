@@ -4,10 +4,13 @@ import promiseMiddleware from "redux-promise";
 import {composeWithDevTools} from "redux-devtools-extension/logOnlyInProduction";
 import {autoRehydrate} from "redux-persist";
 
+import {routingMiddleware} from "./app";
+
 const composeEnhancers = composeWithDevTools({"shouldHotReload": true});
 
 export default composeEnhancers(
     applyMiddleware(
         thunkMiddleware,
-        promiseMiddleware),
+        promiseMiddleware,
+        routingMiddleware),
     autoRehydrate());

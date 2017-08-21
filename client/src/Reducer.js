@@ -1,8 +1,12 @@
 import {combineReducers} from "redux";
 
 import {
-    internalizationReducer
+    internalizationReducer,
+    routingReducer
 } from "./app";
 
 
-export default combineReducers({"intl": internalizationReducer});
+export default combineReducers({
+    "intl": internalizationReducer,
+    "router": routingReducer
+});

@@ -4,6 +4,8 @@ import {Provider as StoreProvider} from "react-redux";
 import store from "./Store";
 import {
     InternalizationProvider,
+    PersistenceProvider,
+    RoutingProvider,
     ThemeProvider
 } from "./app";
 
@@ -11,9 +13,13 @@ import {
 export default ({children}) => (
     <StoreProvider store={store}>
         <ThemeProvider>
-            <InternalizationProvider>
-                {children}
-            </InternalizationProvider>
+            <PersistenceProvider store={store}>
+                <InternalizationProvider>
+                    <RoutingProvider>
+                        {children}
+                    </RoutingProvider>
+                </InternalizationProvider>
+            </PersistenceProvider>
         </ThemeProvider>
     </StoreProvider>
 );
