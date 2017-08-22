@@ -230,10 +230,15 @@
 
         "import-order-autofix/order": [2, {
             "groups": [
-                ["builtin", "internal", "external"],
-                ["sibling", "parent"],
-                "index"
-            ],
+                [
+                    "builtin",
+                    "internal",
+                    "external"
+                ],
+                "parent",
+                "sibling"
+            ]
+            ,
             "newlines-between": "always"
         }]
     }
