@@ -12,7 +12,8 @@ import styled from "styled-components";
 import AppDrawer, {
     reducer as drawerReducer,
     toggleDrawer
-} from "./Drawer";
+} from "../drawer";
+
 import messages from "./Message";
 
 const AppBar = styled(BaseAppBar).attrs({

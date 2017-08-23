@@ -8,7 +8,7 @@
   "dependencies": {},
   "scripts": {
     "install": "(cd client && npm install) && (cd server && npm install)",
-    "start": "concurrently --kill-others-on-fail \"cd client && PORT=23000 npm start\" \"cd server && PORT=23001 npm start\" --all --",
+    "start": "concurrently --kill-others-on-fail \"cd client && PORT=23000 npm start\" \"cd server && PORT=23001 npm start\"",
     "eslint": "eslint",
     "jsonlint": "jsonlint",
     "stylelint": "stylelint",
@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
-    "concurrently": "https://github.com/thaggie/concurrently",
+    "concurrently": "^3.5.0",
     "eslint": "^4.5.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-import-order-autofix": "^0.8.3",

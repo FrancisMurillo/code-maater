@@ -5,6 +5,7 @@
   "extends": "stylelint-config-standard",
   "syntax": "scss",
   "rules": {
-    "indentation": 2
+    "indentation": 2,
+    "block-no-empty": 0
   }
 }
