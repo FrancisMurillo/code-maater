@@ -25,6 +25,8 @@ const MenuList = styled(BaseList).attrs({"disablePadding": true})`
   flex: initial;
 `;
 
+const MenuDivider = styled(Divider).attrs({"inset": false})``;
+
 const MenuItem = injectIntl(({
     intl,
     "icon": Icon,
@@ -41,7 +43,7 @@ const MenuItem = injectIntl(({
 ));
 
 
-export default injectIntl(({intl, open, onRequestClose}) => (
+export default ({intl, open, onRequestClose}) => (
     <Drawer
         open={open}
         onRequestClose={onRequestClose}
@@ -52,7 +54,7 @@ export default injectIntl(({intl, open, onRequestClose}) => (
                 label={messages.dashboard}
             />
         </MenuList>
-        <Divider />
+        <MenuDivider />
         <MenuList>
             <MenuItem
                 icon={SummaryIcon}
@@ -90,11 +92,13 @@ export default injectIntl(({intl, open, onRequestClose}) => (
                 icon={EntityEffortIcon}
                 label={messages.entityEffort}
             />
-            <Divider />
+        </MenuList>
+        <MenuDivider />
+        <MenuList>
             <MenuItem
                 icon={SettingIcon}
                 label={messages.setting}
             />
         </MenuList>
     </Drawer>
-));
+);
