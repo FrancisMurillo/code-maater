@@ -1,5 +1,6 @@
 import React from "react";
 import {div} from "react-dom";
+import {injectIntl} from "react-intl";
 import BaseDrawer from "material-ui/Drawer";
 import Divider from "material-ui/Divider";
 import BaseList, {ListItem, ListItemIcon, ListItemText} from "material-ui/List";
@@ -16,34 +17,84 @@ import EntityEffortIcon from "material-ui-icons/DonutSmall";
 import SettingIcon from "material-ui-icons/Settings";
 import styled from "styled-components";
 
+import messages from "./Message";
+
 const Drawer = styled(BaseDrawer).attrs({"anchor": "left"})``;
 
 const MenuList = styled(BaseList).attrs({"disablePadding": true})`
   flex: initial;
 `;
 
+const MenuItem = injectIntl(({
+    intl,
+    "icon": Icon,
+    label
+}) => (
+    <ListItem button>
+        <ListItemIcon>
+            <Icon />
+        </ListItemIcon>
+        <ListItemText
+            primary={intl.formatMessage(label)}
+        />
+    </ListItem>
+));
 
-export default ({open, onRequestClose}) => (
+
+export default injectIntl(({intl, open, onRequestClose}) => (
     <Drawer
         open={open}
         onRequestClose={onRequestClose}
     >
         <MenuList>
-            <ListItem button>
-                <ListItemIcon>
-                    <DashboardIcon />
-                </ListItemIcon>
-                <ListItemText primary="Dashboard" />
-            </ListItem>
+            <MenuItem
+                icon={DashboardIcon}
+                label={messages.dashboard}
+            />
         </MenuList>
         <Divider />
         <MenuList>
-            <ListItem button>
-                <ListItemIcon>
-                    <DashboardIcon />
-                </ListItemIcon>
-                <ListItemText primary="Dashboard" />
-            </ListItem>
+            <MenuItem
+                icon={SummaryIcon}
+                label={messages.summary}
+            />
+            <MenuItem
+                icon={RevisionIcon}
+                label={messages.revision}
+            />
+            <MenuItem
+                icon={CouplingIcon}
+                label={messages.coupling}
+            />
+            <MenuItem
+                icon={AgeIcon}
+                label={messages.age}
+            />
+            <MenuItem
+                icon={AbsoluteChurnIcon}
+                label={messages.absoluteChurn}
+            />
+            <MenuItem
+                icon={AuthorChurnIcon}
+                label={messages.authorChurn}
+            />
+            <MenuItem
+                icon={EntityChurnIcon}
+                label={messages.entityChurn}
+            />
+            <MenuItem
+                icon={EntityOwnershipIcon}
+                label={messages.entityOwnership}
+            />
+            <MenuItem
+                icon={EntityEffortIcon}
+                label={messages.entityEffort}
+            />
+            <Divider />
+            <MenuItem
+                icon={SettingIcon}
+                label={messages.setting}
+            />
         </MenuList>
     </Drawer>
-);
+));
