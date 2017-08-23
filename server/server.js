@@ -10,7 +10,6 @@ import cache from "memory-cache";
 import dotenv from "dotenv";
 import express from "express";
 import fs from "fs";
-import moment from "moment";
 import path from "path";
 import shell from "shelljs";
 
@@ -19,11 +18,15 @@ dotenv.config();
 const {
     "JAVA_COMMAND": javaCommand,
     "GIT_COMMAND": gitCommand,
-    "CODE_MAAT_JAR_FILE": codeMaatJarFile,
-    "PROJECT_DIR": baseProjectDir
+    "CODE_MAAT_JAR_FILE": codeMaatJarFile
 } = process.env;
 
-const projectDir = path.resolve(baseProjectDir);
+const baseProjectDir = process.argv[2];
+if (!baseProjectDir) {
+    console.log("No project directory specified. Using this project as a repository.");
+}
+
+const projectDir = path.resolve(process.argv[2] || "..");
 
 if (!shell.which(javaCommand)) {
     console.error(`Java command(JAVA_COMMAND) does not exist:
