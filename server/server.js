@@ -135,8 +135,8 @@ router.delete("/code-maat", (_req, res) => {
 
 router.get("/code-maat", (req, res) => {
     const {
-        "start_date": startDate,
-        "end_date": endDate,
+        startDate,
+        endDate,
         analysis
     } = req.query;
 
@@ -215,7 +215,8 @@ router.get("/code-maat", (req, res) => {
 
 app.use(router);
 
-const serverPort = process.env.PORT;
+const serverPort = parseInt(process.env.PORT, 10);
+
 app.set("port", (serverPort ? serverPort + 1 : 23001));
 app.listen(app.get("port"), () => {
     console.log(`Listening on ${app.get("port")}`);
