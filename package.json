@@ -8,7 +8,7 @@
   "dependencies": {},
   "scripts": {
     "install": "(cd client && npm install) && (cd server && npm install)",
-    "start": "concurrently -k \"cd client && PORT=23000 npm start \" \"cd server && PORT=23001 npm start\" --all --",
+    "start": "PORT=23000 concurrently -k \"cd client && npm start \" \"cd server && npm start\" --all --",
     "eslint": "eslint",
     "jsonlint": "jsonlint",
     "stylelint": "stylelint",

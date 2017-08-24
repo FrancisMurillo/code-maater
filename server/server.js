@@ -214,7 +214,9 @@ router.get("/code-maat", (req, res) => {
 });
 
 app.use(router);
-app.set("port", (process.env.PORT || 23001));
+
+const serverPort = process.env.PORT;
+app.set("port", (serverPort ? serverPort + 1 : 23001));
 app.listen(app.get("port"), () => {
     console.log(`Listening on ${app.get("port")}`);
 });
