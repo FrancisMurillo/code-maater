@@ -18,8 +18,8 @@ const AppContainer = reduxRequest({
     "onFetch": (data, dispatch) => null,
     "loading": LoadingScreen,
     "initialData": {}
-})(() => (
-    <FrameContainer>
+})((props) => (
+    <FrameContainer >
         <RouteContainer />
     </FrameContainer>
 ));

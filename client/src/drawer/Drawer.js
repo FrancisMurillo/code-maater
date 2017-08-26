@@ -1,5 +1,5 @@
 import React from "react";
-import {div} from "react-dom";
+import {connect} from "react-redux";
 import {injectIntl} from "react-intl";
 import BaseDrawer from "material-ui/Drawer";
 import Divider from "material-ui/Divider";
@@ -16,6 +16,7 @@ import EntityOwnershipIcon from "material-ui-icons/BubbleChart";
 import EntityEffortIcon from "material-ui-icons/DonutSmall";
 import SettingIcon from "material-ui-icons/Settings";
 import styled from "styled-components";
+import {replace} from "react-router-redux";
 
 import messages from "./Message";
 
@@ -23,6 +24,7 @@ const Drawer = styled(BaseDrawer).attrs({"anchor": "left"})``;
 
 const MenuList = styled(BaseList).attrs({"disablePadding": true})`
   flex: initial;
+  overflow-y: hidden;
 `;
 
 const MenuDivider = styled(Divider).attrs({"inset": false})``;
@@ -30,9 +32,13 @@ const MenuDivider = styled(Divider).attrs({"inset": false})``;
 const MenuItem = injectIntl(({
     intl,
     "icon": Icon,
-    label
+    label,
+    onClick
 }) => (
-    <ListItem button>
+    <ListItem
+        button
+        onClick={onClick}
+    >
         <ListItemIcon>
             <Icon />
         </ListItemIcon>
@@ -43,7 +49,9 @@ const MenuItem = injectIntl(({
 ));
 
 
-export default ({intl, open, onRequestClose}) => (
+const AppDrawer = ({
+    intl, open, onRequestClose, navigate
+}) => (
     <Drawer
         open={open}
         onRequestClose={onRequestClose}
@@ -52,6 +60,7 @@ export default ({intl, open, onRequestClose}) => (
             <MenuItem
                 icon={DashboardIcon}
                 label={messages.dashboard}
+                onClick={() => navigate("/")}
             />
         </MenuList>
         <MenuDivider />
@@ -59,38 +68,47 @@ export default ({intl, open, onRequestClose}) => (
             <MenuItem
                 icon={SummaryIcon}
                 label={messages.summary}
+                onClick={() => navigate("/summary")}
             />
             <MenuItem
                 icon={RevisionIcon}
                 label={messages.revision}
+                onClick={() => navigate("/revision")}
             />
             <MenuItem
                 icon={CouplingIcon}
                 label={messages.coupling}
+                onClick={() => navigate("/coupling")}
             />
             <MenuItem
                 icon={AgeIcon}
                 label={messages.age}
+                onClick={() => navigate("/age")}
             />
             <MenuItem
                 icon={AbsoluteChurnIcon}
                 label={messages.absoluteChurn}
+                onClick={() => navigate("/absoluteChurn")}
             />
             <MenuItem
                 icon={AuthorChurnIcon}
                 label={messages.authorChurn}
+                onClick={() => navigate("/authorChurn")}
             />
             <MenuItem
                 icon={EntityChurnIcon}
                 label={messages.entityChurn}
+                onClick={() => navigate("/entityChurn")}
             />
             <MenuItem
                 icon={EntityOwnershipIcon}
                 label={messages.entityOwnership}
+                onClick={() => navigate("/entityOwnership")}
             />
             <MenuItem
                 icon={EntityEffortIcon}
                 label={messages.entityEffort}
+                onClick={() => navigate("/entityEffort")}
             />
         </MenuList>
         <MenuDivider />
@@ -98,7 +116,13 @@ export default ({intl, open, onRequestClose}) => (
             <MenuItem
                 icon={SettingIcon}
                 label={messages.setting}
+                onClick={() => navigate("/setting")}
             />
         </MenuList>
     </Drawer>
 );
+
+export default connect(
+    null,
+    {"navigate": (...args) => replace(...args)}
+)(AppDrawer);
