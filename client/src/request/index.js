@@ -69,7 +69,7 @@ export default (options) => {
             }),
             (dispatch) => ({
                 "_request": {
-                    "onMount": (currentProps) => {
+                    "onMount": (_currentProps) => {
                         dispatch(registerRequest(key, {initialData}));
                     },
                     "onMounted": (currentProps) => {
