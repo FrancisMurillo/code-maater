@@ -7,6 +7,7 @@
 /* eslint no-sync: [0]*/
 import bodyParser from "body-parser";
 import cache from "memory-cache";
+import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import fs from "fs";
@@ -94,6 +95,7 @@ const analysisCache = new cache.Cache();
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({"extended": false}));
+app.use(cors());
 
 const router = express.Router();
 

@@ -12,7 +12,12 @@ const WebService = () => {
     const extractResponseData = ({data}) => data;
 
     return {
-        getAnalysis({analysis, startDate, endDate}) {
+        fetchAppData() {
+            return webService.get("/")
+                .then(extractResponseData);
+        },
+
+        fetchAnalysis({analysis, startDate, endDate}) {
             return webService.get(
                 "/code-maat",
                 {

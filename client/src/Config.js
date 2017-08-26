@@ -1,4 +1,9 @@
 /* eslint no-process-env: 0 */
-const clientPort = process.env.PORT;
+/* eslint no-magic-numbers: 0 */
+const clientPort = process.env.PORT ?
+    parseInt(process.env.PORT, 10) : 23000;
 
-export default {"apiHost": `http://127.0.0.1:${clientPort + 1}`};
+export default {
+    "apiHost": `http://localhost:${clientPort + 1}`,
+    "persistence": {"whitelist": []}
+};

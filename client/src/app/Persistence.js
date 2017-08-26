@@ -1,22 +1,9 @@
 /* eslint react/no-set-state: [0]*/
 import React from "react";
-import ReactLoading from "react-loading";
 import {persistStore} from "redux-persist";
-import styled from "styled-components";
 
-const LoadingScreen = styled.div`
-  background-color: ${(props) => props.theme.palette.primary[500]};
-  width: 100%;
-  height: 100%;
-`;
-
-const Loader = styled(ReactLoading).attrs({
-    "color": (props) => props.theme.palette.text.primary,
-    "type": "cubes"
-})`
-  width: inherit !important;
-  height: inherit !important;
-`;
+import config from "../Config";
+import LoadingScreen from "../Loading";
 
 export class Provider extends React.Component {
     constructor() {
@@ -26,7 +13,7 @@ export class Provider extends React.Component {
     }
 
     componentWillMount() {
-        persistStore(this.props.store, {}, () => {
+        persistStore(this.props.store, config.persistStore, () => {
             this.setState({"rehydrated": true});
         });
     }
@@ -36,9 +23,7 @@ export class Provider extends React.Component {
             return this.props.children;
         } else {
             return (
-                <LoadingScreen>
-                    <Loader />
-                </LoadingScreen>
+                <LoadingScreen />
             );
         }
     }

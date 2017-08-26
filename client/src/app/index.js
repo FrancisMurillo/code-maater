@@ -1,4 +1,7 @@
 import {
+    reducer as appReducer
+} from "./Application";
+import {
     Provider as InternalizationProvider,
     reducer as internalizationReducer
 } from "./Internationalization";
@@ -15,6 +18,7 @@ import {
 } from "./Theme";
 
 export {
+    appReducer,
     internalizationReducer,
     InternalizationProvider,
     PersistenceProvider,
