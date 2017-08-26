@@ -7,15 +7,12 @@ export default () => (
         <Route
             exact
             path={"/"}
-            component={() => (<h1>{"AX"}</h1>)}
         />
         <Route
             path={"/summary"}
-            component={() => (<h1>{"BET"}</h1>)}
         />
         <Route
             path={"/revision"}
-            component={() => (<h1>{"MEOW"}</h1>)}
         />
         <Route
             path={"/coupling"}
