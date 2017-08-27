@@ -1,7 +1,9 @@
 import React from "react";
-import {LinearProgress} from "material-ui/Progress";
+import {div} from "react-dom";
+import Tabs, {Tab} from "material-ui/Tabs";
 
 import {webService, Analysis} from "../api";
+import {RequestLoader} from "../component";
 import Grid, {columnType} from "../grid";
 import reduxRequest from "../request";
 
@@ -21,21 +23,30 @@ export default reduxRequest({
         state.app.maxDate
     ],
     "initialData": [],
-    "loading": () => (
-        <LinearProgress
-            mode={"query"}
-            color={"accent"}
-        />)
+    "loading": RequestLoader
 })(({data, fetching}) => (
-    <Grid
-        gridKey={gridKey}
-        columns={[
-            {"key": "statistic"},
-            {
-                "key": "value",
-                "mapper": columnType.integer
-            }
-        ]}
-        data={data}
-    />
+    <div>
+        <Tabs
+            fullWidth
+            indicatorColor={"primary"}
+            textColor={"primary"}
+            onChange={() => null}
+            value={0}
+        >
+            <Tab
+                label={"Records"}
+            />
+        </Tabs>
+        <Grid
+            gridKey={gridKey}
+            columns={[
+                {"key": "statistic"},
+                {
+                    "key": "value",
+                    "mapper": columnType.integer
+                }
+            ]}
+            data={data}
+        />
+    </div>
 ));

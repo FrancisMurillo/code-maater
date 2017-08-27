@@ -135,7 +135,7 @@ const Grid = injectIntl(class BaseGrid extends React.Component {
                     columns={columnModels}
                     rowGetter={(index) => rows[index]}
                     rowsCount={rows.length}
-                    toolbar={() => (<Toolbar enableFilter />)}
+                    toolbar={(<Toolbar enableFilter />)}
                     onGridSort={onSort}
                 />
             );
