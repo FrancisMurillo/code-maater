@@ -10,11 +10,13 @@ import Typography from "material-ui/Typography";
 import styled from "styled-components";
 
 import AppDrawer, {
-    reducer as drawerReducer,
-    toggleDrawer
+    toggleDrawer,
+    messages as drawerMessages
 } from "../drawer";
 
 import messages from "./Message";
+import reducer, {frameSelector} from "./Reducer";
+import {changeTitle} from "./Action";
 
 const AppBar = styled(BaseAppBar).attrs({
     "color": "primary",
@@ -38,16 +40,19 @@ const MenuTitle = styled(Typography).attrs({
     "color": "inherit"
 })``;
 
-export {drawerReducer};
+export {reducer, changeTitle};
 
-const Frame = injectIntl(({intl, onShowDrawer, children}) => (
+const Frame = injectIntl(({
+    intl, onShowDrawer, children, title
+}) => (
     <div>
         <AppDrawer />
         <AppBar >
             <Toolbar>
                 <MenuButton onClick={onShowDrawer} />
                 <MenuTitle>
-                    {intl.formatMessage(messages.title)}
+                    {title ? intl.formatMessage(title) :
+                        intl.formatMessage(messages.title)}
                 </MenuTitle>
             </Toolbar>
         </AppBar>
@@ -55,7 +60,25 @@ const Frame = injectIntl(({intl, onShowDrawer, children}) => (
     </div>
 ));
 
+const routeSelector = (state) => state.router || {};
+
 export default connect(
-    null,
+    (state) => {
+        const routeState = routeSelector(state);
+        const frameState = frameSelector(state);
+
+        if (routeState.location) {
+            const {pathname} = routeState.location;
+            const baseRouteName = pathname.split("/")[1];
+            const drawerMessage = drawerMessages[baseRouteName];
+
+            return {
+                ...frameState,
+                "title": drawerMessage || ""
+            };
+        } else {
+            return frameState;
+        }
+    },
     {"onShowDrawer": () => toggleDrawer(true)}
 )(Frame);
