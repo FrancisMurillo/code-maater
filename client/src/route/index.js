@@ -1,6 +1,7 @@
 import React from "react";
-import {h1} from "react-dom";
 import {Route} from "react-router";
+
+import SummaryScreen from "../summary";
 
 export default () => (
     <div>
@@ -10,6 +11,7 @@ export default () => (
         />
         <Route
             path={"/summary"}
+            component={SummaryScreen}
         />
         <Route
             path={"/revision"}

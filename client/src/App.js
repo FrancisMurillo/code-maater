@@ -15,7 +15,6 @@ const AppContainer = reduxRequest({
     "key": requestKey,
     "fetch": webService.fetchAppData,
     "fetchArgs": (_state) => [],
-    "onFetch": (data, dispatch) => null,
     "loading": LoadingScreen,
     "initialData": {}
 })((props) => (

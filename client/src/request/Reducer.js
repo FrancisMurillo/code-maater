@@ -12,7 +12,8 @@ const initialRequestState = {
     "fetching": false,
     "empty": true,
     "data": null,
-    "initialData": null
+    "initialData": null,
+    "registered": false
 };
 
 const requestsSelector = (state) => state.request || {};
@@ -23,7 +24,8 @@ const requestReducer = handleActions({
     [registerRequest]: (state, action) => ({
         ...state,
         ...action.payload,
-        "registered": true
+        "registered": true,
+        "empty": true
     }),
     [fetchData]: (state, _action) => ({
         ...state,

@@ -15,7 +15,7 @@ export class Provider extends React.Component {
     componentWillMount() {
         persistStore(this.props.store, config.persistStore, () => {
             this.setState({"rehydrated": true});
-        });
+        }).purge();
     }
 
     render() {

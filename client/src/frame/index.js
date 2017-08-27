@@ -18,7 +18,7 @@ import messages from "./Message";
 
 const AppBar = styled(BaseAppBar).attrs({
     "color": "primary",
-    "position": "absolute"
+    "position": "static"
 })``;
 
 const Toolbar = styled(BaseToolbar)``;

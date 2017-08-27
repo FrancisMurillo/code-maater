@@ -19,7 +19,7 @@ dotenv.config();
 const {
     "JAVA_COMMAND": javaCommand,
     "GIT_COMMAND": gitCommand,
-    "CODE_MAAT_JAR_FILE": codeMaatJarFile
+    "CODE_MAAT_JAR_FILE": baseCodeMaatJarFile
 } = process.env;
 
 const baseProjectDir = process.argv[2];
@@ -28,6 +28,7 @@ if (!baseProjectDir) {
 }
 
 const projectDir = path.resolve(process.argv[2] || "..");
+const codeMaatJarFile = path.resolve(baseCodeMaatJarFile);
 
 if (!shell.which(javaCommand)) {
     console.error(`Java command(JAVA_COMMAND) does not exist:
@@ -144,10 +145,10 @@ router.get("/code-maat", (req, res) => {
 
     if (!isDateValue(startDate)) {
         res.status(422)
-            .send(`Start Date(start_date) is a required date: ${startDate}`);
+            .send(`Start Date is a required date: ${startDate}`);
     } else if (!isDateValue(endDate)) {
         res.status(422)
-            .send(`End Date(end_date) is a required date: ${endDate}`);
+            .send(`End Date is a required date: ${endDate}`);
     } else if (startDate < minDate) {
         res.status(422)
             .send(`Start Date is less than Min Date:
@@ -162,11 +163,12 @@ router.get("/code-maat", (req, res) => {
  ${startDate} > ${endDate}`);
     } else if (!isAnalysisValue(analysis)) {
         res.status(422)
-            .send(`Analysis(analysis) is not a valid analysis type:
+            .send(`Analysis is not a valid analysis type:
  ${analysis}`);
     } else {
         const cacheKey = [analysis, startDate, endDate].join("|");
         const cachedValue = analysisCache.get(cacheKey);
+
 
         if (cachedValue) {
             res.send(cachedValue);

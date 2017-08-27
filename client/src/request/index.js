@@ -41,24 +41,25 @@ export default (options) => {
             render() {
                 const {
                     _request,
-                    "_requestProps": {
-                        data,
-                        fetching
-                    },
+                    "_requestProps": {data},
                     ...otherProps
                 } = this.props;
 
                 const loadingElement = loading ?
                     React.createElement(loading) : null;
 
-                return this.props._requestProps.registered &&
-                    !this.props._requestProps.empty ? (
+                if (!this.props._requestProps.registered) {
+                    return null;
+                } else if (this.props._requestProps.fetching) {
+                    return loadingElement;
+                } else {
+                    return (
                         <Component
                             {...otherProps}
                             data={data}
-                            fetching={fetching}
                         />
-                    ) : loadingElement;
+                    );
+                }
             }
         }
 
@@ -73,16 +74,16 @@ export default (options) => {
                         dispatch(registerRequest(key, {initialData}));
                     },
                     "onMounted": (currentProps) => {
-                        dispatch(fetchData(key));
+                        dispatch(fetchData(key, ...currentProps._fetchArgs));
 
                         const fetchRequest = fetch(...currentProps._fetchArgs);
 
                         fetchRequest
-                            .then((data) => {
-                                dispatch(receiveData(key, data));
+                            .then((newData) => {
+                                dispatch(receiveData(key, newData));
 
                                 if (onFetch) {
-                                    onFetch(data, dispatch);
+                                    onFetch(newData, dispatch);
                                 }
                             });
                     }
