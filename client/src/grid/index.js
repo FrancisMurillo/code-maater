@@ -6,7 +6,7 @@ import {Toolbar, Data} from "react-data-grid-addons";
 import {connect} from "react-redux";
 
 import columnMessages from "./ColumnMessage";
-import {registerGrid, sortColumn} from "./Action";
+import {registerGrid, sortColumn, filterColumn} from "./Action";
 import reducer, {gridSelector} from "./Reducer";
 
 const filterRecords = (filters) => {
@@ -107,7 +107,7 @@ const Grid = injectIntl(class BaseGrid extends React.Component {
                     },
                     filters
                 },
-                "_grid": {onSort}
+                "_grid": {onSort, onFilter}
             } = this.props;
 
             const columnModels = columns.map((column) => {
@@ -137,6 +137,8 @@ const Grid = injectIntl(class BaseGrid extends React.Component {
                     rowsCount={rows.length}
                     toolbar={(<Toolbar enableFilter />)}
                     onGridSort={onSort}
+                    onAddFilter={onFilter}
+                    onClearFilters={onFilter}
                 />
             );
         } else {
@@ -154,7 +156,10 @@ export default connect(
             "onMount": (_currentProps) =>
                 dispatch(registerGrid(props.gridKey)),
             "onSort": (column, direction) =>
-                dispatch(sortColumn(props.gridKey, column, direction))
+                dispatch(sortColumn(props.gridKey, column, direction)),
+            "onFilter": (filter) => {
+                dispatch(filterColumn(props.gridKey, filter));
+            }
         }
     })
 )(Grid);

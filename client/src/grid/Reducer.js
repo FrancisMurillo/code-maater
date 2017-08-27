@@ -1,11 +1,11 @@
 import {handleActions} from "redux-actions";
 
-import {registerGrid, sortColumn} from "./Action";
+import {registerGrid, sortColumn, filterColumn} from "./Action";
 
 const initialState = {};
 const initialGridState = {
     "sorting": {},
-    "filters": []
+    "filters": {}
 };
 
 const gridsSelector = (state) => state.grid || {};
@@ -24,7 +24,36 @@ const gridReducer = handleActions({
             ...state.sorting,
             ...action.payload
         }
-    })
+    }),
+    [filterColumn]: (state, action) => {
+        if (action.payload) {
+            const {filterTerm, column} = action.payload;
+
+            if (filterTerm) {
+                return {
+                    ...state,
+                    "filters": {
+                        ...state.filters,
+                        [column.key]: action.payload
+                    }
+                };
+            } else {
+                const {
+                    "filters": {
+                        [column.key]: _filter,
+                        ...filters
+                    }
+                } = state;
+
+                return {
+                    ...state,
+                    filters
+                };
+            }
+        } else {
+            return {};
+        }
+    }
 }, initialGridState);
 
 export default (state = initialState, action) => {

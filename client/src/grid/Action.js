@@ -15,3 +15,8 @@ export const sortColumn = createAction(
         direction
     }),
     gridMeta);
+
+export const filterColumn = createAction(
+    "GRID/FILTER_COLUMN",
+    (_gridKey, filter) => filter,
+    gridMeta);
