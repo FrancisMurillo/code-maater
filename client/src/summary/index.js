@@ -1,9 +1,12 @@
 import React from "react";
 import {div} from "react-dom";
-import Tabs, {Tab} from "material-ui/Tabs";
 
 import {webService, Analysis} from "../api";
-import {RequestLoader} from "../component";
+import {
+    RequestLoader,
+    AnalysisTabs,
+    RecordTab
+} from "../component";
 import Grid, {columnType} from "../grid";
 import reduxRequest from "../request";
 
@@ -26,17 +29,12 @@ export default reduxRequest({
     "loading": RequestLoader
 })(({data, fetching}) => (
     <div>
-        <Tabs
-            fullWidth
-            indicatorColor={"primary"}
-            textColor={"primary"}
+        <AnalysisTabs
             onChange={() => null}
             value={0}
         >
-            <Tab
-                label={"Records"}
-            />
-        </Tabs>
+            <RecordTab />
+        </AnalysisTabs>
         <Grid
             gridKey={gridKey}
             columns={[
