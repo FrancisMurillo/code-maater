@@ -13,6 +13,7 @@ import AppDrawer, {
     toggleDrawer,
     messages as drawerMessages
 } from "../drawer";
+import AppToolbar from "../toolbar";
 
 import messages from "./Message";
 import reducer, {frameSelector} from "./Reducer";
@@ -56,6 +57,7 @@ const Frame = injectIntl(({
                 </MenuTitle>
             </Toolbar>
         </AppBar>
+        <AppToolbar />
         {children}
     </div>
 ));
