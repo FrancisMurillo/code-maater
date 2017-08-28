@@ -34,8 +34,7 @@ const TabContainer = injectIntl(class BaseTab extends React.Component {
         if (this.props._tabProps.registered) {
             const {
                 intl,
-                "_tabProps": {tabIndex},
-                "_tab": {on}
+                "_tabProps": {tabIndex}
             } = this.props;
 
             return (
@@ -47,15 +46,11 @@ const TabContainer = injectIntl(class BaseTab extends React.Component {
                     >
                         {React.Children.map(this.props.children, (child) => {
                             const {props} = child;
-                            const {
-                                tabLabel,
-                                ...otherProps
-                            } = props;
+                            const {tabLabel} = props;
 
                             return (
                                 <Tab
                                     label={intl.formatMessage(tabLabel)}
-                                    {...otherProps}
                                 />
                             );
                         })}
