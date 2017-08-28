@@ -7,6 +7,7 @@ import CouplingScreen from "../coupling";
 import AgeScreen from "../age";
 import AbsoluteChurnScreen from "../absoluteChurn";
 import AuthorChurnScreen from "../authorChurn";
+import EntityChurnScreen from "../entityChurn";
 
 export default () => (
     <div>
@@ -40,6 +41,7 @@ export default () => (
         />
         <Route
             path={"/entityChurn"}
+            component={EntityChurnScreen}
         />
         <Route
             path={"/entityOwnership"}
