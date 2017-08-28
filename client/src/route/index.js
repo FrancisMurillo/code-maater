@@ -3,6 +3,7 @@ import {Route} from "react-router";
 
 import SummaryScreen from "../summary";
 import RevisionScreen from "../revision";
+import CouplingScreen from "../coupling";
 
 export default () => (
     <div>
@@ -20,6 +21,7 @@ export default () => (
         />
         <Route
             path={"/coupling"}
+            component={CouplingScreen}
         />
         <Route
             path={"/age"}
