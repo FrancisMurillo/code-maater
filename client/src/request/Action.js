@@ -10,7 +10,7 @@ export const registerRequest = createAction(
 
 export const fetchData = createAction(
     "REQUEST/FETCH_DATA",
-    (_requestKey) => null,
+    (_requestKey, ...args) => args,
     requestMeta);
 
 export const receiveData = createAction(

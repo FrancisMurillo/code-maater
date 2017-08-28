@@ -1,6 +1,7 @@
 import React from "react";
 import {div} from "react-dom";
 
+import {analysisFetchSelector} from "../Selector";
 import {webService, Analysis} from "../api";
 import {
     RequestLoader,
@@ -21,10 +22,7 @@ export default reduxRequest({
             startDate,
             endDate
         }),
-    "fetchArgs": (state) => [
-        state.app.minDate,
-        state.app.maxDate
-    ],
+    "fetchArgs": analysisFetchSelector,
     "initialData": [],
     "loading": RequestLoader
 })(({data, fetching}) => (
