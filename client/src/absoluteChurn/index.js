@@ -1,5 +1,6 @@
 import React from "react";
 import {div} from "react-dom";
+import {AreaStackChart} from "react-d3-basic";
 
 import {analysisFetchSelector} from "../Selector";
 import {webService, analysis} from "../api";
@@ -9,6 +10,28 @@ import reduxRequest from "../request";
 import TabContainer from "../tab";
 
 const pageKey = "absoluteChurn";
+
+const ChurnChart = ({data}) => {
+    return (
+        <AreaStackChart
+            chartSeries={[
+                {
+                    "field": "deleted",
+                    "name": "Deleted"
+                },
+                {
+                    "field": "added",
+                    "name": "Added"
+                }
+            ]}
+            x={(item) => new Date(item.date)}
+            xScale={"time"}
+            data={data}
+            width={700}
+            height={400}
+        />
+    );
+};
 
 export default reduxRequest({
     "key": pageKey,
@@ -42,6 +65,10 @@ export default reduxRequest({
                         "mapper": columnType.integer
                     }
                 ]}
+                data={data}
+            />
+            <ChurnChart
+                tabLabel={componentMessages.chart}
                 data={data}
             />
         </TabContainer>
