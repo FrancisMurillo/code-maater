@@ -4,6 +4,7 @@ import {Route} from "react-router";
 import SummaryScreen from "../summary";
 import RevisionScreen from "../revision";
 import CouplingScreen from "../coupling";
+import AgeScreen from "../age";
 
 export default () => (
     <div>
@@ -25,6 +26,7 @@ export default () => (
         />
         <Route
             path={"/age"}
+            component={AgeScreen}
         />
         <Route
             path={"/absoluteChurn"}
