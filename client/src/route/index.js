@@ -5,6 +5,7 @@ import SummaryScreen from "../summary";
 import RevisionScreen from "../revision";
 import CouplingScreen from "../coupling";
 import AgeScreen from "../age";
+import AbsoluteChurnScreen from "../absoluteChurn";
 
 export default () => (
     <div>
@@ -30,6 +31,7 @@ export default () => (
         />
         <Route
             path={"/absoluteChurn"}
+            component={AbsoluteChurnScreen}
         />
         <Route
             path={"/authorChurn"}
