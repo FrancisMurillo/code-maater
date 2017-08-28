@@ -163,9 +163,8 @@ export default connect(
                 dispatch(registerGrid(props.gridKey)),
             "onSort": (column, direction) =>
                 dispatch(sortColumn(props.gridKey, column, direction)),
-            "onFilter": (filter) => {
-                dispatch(filterColumn(props.gridKey, filter));
-            }
+            "onFilter": (filter) =>
+                dispatch(filterColumn(props.gridKey, filter))
         }
     })
 )(Grid);

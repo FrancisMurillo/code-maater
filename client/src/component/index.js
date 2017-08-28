@@ -24,3 +24,5 @@ export const RecordTab = injectIntl(({intl, ...props}) => (
         {...props}
     />
 ));
+
+export {messages};

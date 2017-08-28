@@ -10,6 +10,7 @@ import {reducer as drawerReducer} from "./drawer";
 import {reducer as frameReducer} from "./frame";
 import {reducer as gridReducer} from "./grid";
 import {reducer as requestReducer} from "./request";
+import {reducer as tabReducer} from "./tab";
 import {reducer as toolbarReducer} from "./toolbar";
 
 export const joinReducers = (...reducers) => {
@@ -29,6 +30,7 @@ export default joinReducers(
         "intl": internalizationReducer,
         "request": requestReducer,
         "router": routingReducer,
+        "tab": tabReducer,
         "toolbar": toolbarReducer
     }),
     appRequestReducer);

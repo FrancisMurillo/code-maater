@@ -3,19 +3,15 @@ import {div} from "react-dom";
 
 import {analysisFetchSelector} from "../Selector";
 import {webService, analysis} from "../api";
-import {
-    RequestLoader,
-    AnalysisTabs,
-    RecordTab
-} from "../component";
+import {RequestLoader, messages as componentMessages} from "../component";
 import Grid, {columnType} from "../grid";
 import reduxRequest from "../request";
+import TabContainer from "../tab";
 
-const requestKey = "coupling";
-const gridKey = requestKey;
+const pageKey = "absoluteChurn";
 
 export default reduxRequest({
-    "key": requestKey,
+    "key": pageKey,
     "fetch": (startDate, endDate) =>
         webService.fetchAnalysis({
             "analysis": analysis.absoluteChurn,
@@ -27,30 +23,27 @@ export default reduxRequest({
     "loading": RequestLoader
 })(({data}) => (
     <div>
-        <AnalysisTabs
-            onChange={() => null}
-            value={0}
-        >
-            <RecordTab />
-        </AnalysisTabs>
-        <Grid
-            gridKey={gridKey}
-            columns={[
-                {"key": "date"},
-                {
-                    "key": "commits",
-                    "mapper": columnType.integer
-                },
-                {
-                    "key": "added",
-                    "mapper": columnType.integer
-                },
-                {
-                    "key": "deleted",
-                    "mapper": columnType.integer
-                }
-            ]}
-            data={data}
-        />
+        <TabContainer tabKey={pageKey}>
+            <Grid
+                tabLabel={componentMessages.record}
+                gridKey={pageKey}
+                columns={[
+                    {"key": "date"},
+                    {
+                        "key": "commits",
+                        "mapper": columnType.integer
+                    },
+                    {
+                        "key": "added",
+                        "mapper": columnType.integer
+                    },
+                    {
+                        "key": "deleted",
+                        "mapper": columnType.integer
+                    }
+                ]}
+                data={data}
+            />
+        </TabContainer>
     </div>
 ));

@@ -5,6 +5,7 @@
   "proxy": "http://localhost:23001",
   "dependencies": {
     "axios": "^0.16.2",
+    "d3": "^4.10.0",
     "history": "^4.6.3",
     "jss": "^9.0.0-pre.3",
     "jss-preset-default": "^3.0.0",
