@@ -14,7 +14,7 @@ export default defineMessages({
     "revision": {
         "id": "drawer.revision",
         "description": "Menu label for revision",
-        "defaultMessage": "Revision"
+        "defaultMessage": "Revisions"
     },
     "coupling": {
         "id": "drawer.coupling",

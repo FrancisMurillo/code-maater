@@ -11,14 +11,14 @@ import {
 import Grid, {columnType} from "../grid";
 import reduxRequest from "../request";
 
-const requestKey = "summary";
+const requestKey = "revision";
 const gridKey = requestKey;
 
 export default reduxRequest({
     "key": requestKey,
     "fetch": (startDate, endDate) =>
         webService.fetchAnalysis({
-            "analysis": analysis.summary,
+            "analysis": analysis.revisions,
             startDate,
             endDate
         }),
@@ -36,9 +36,9 @@ export default reduxRequest({
         <Grid
             gridKey={gridKey}
             columns={[
-                {"key": "statistic"},
+                {"key": "entity"},
                 {
-                    "key": "value",
+                    "key": "nRevs",
                     "mapper": columnType.integer
                 }
             ]}

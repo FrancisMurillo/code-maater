@@ -1,7 +1,7 @@
 import webService from "./WebService";
-import {Analysis} from "./Enum";
+import {analysis} from "./Enum";
 
 export {
     webService,
-    Analysis
+    analysis
 };

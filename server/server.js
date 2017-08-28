@@ -105,7 +105,7 @@ const isDateValue = (value) => datePattern.test(value);
 
 const analysisValues = {
     "summary": "summary",
-    "revision": "revision",
+    "revisions": "revisions",
     "coupling": "coupling",
     "age": "age",
     "abs-churn": "abs-churn",

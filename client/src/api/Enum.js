@@ -1,6 +1,6 @@
-export const Analysis = {
+export const analysis = {
     "summary": "summary",
-    "revision": "revision",
+    "revisions": "revisions",
     "coupling": "coupling",
     "age": "age",
     "absoluteChurn": "abs-churn",

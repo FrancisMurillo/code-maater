@@ -2,6 +2,7 @@ import React from "react";
 import {Route} from "react-router";
 
 import SummaryScreen from "../summary";
+import RevisionScreen from "../revision";
 
 export default () => (
     <div>
@@ -15,6 +16,7 @@ export default () => (
         />
         <Route
             path={"/revision"}
+            component={RevisionScreen}
         />
         <Route
             path={"/coupling"}
