@@ -9,6 +9,7 @@ import AbsoluteChurnScreen from "../absoluteChurn";
 import AuthorChurnScreen from "../authorChurn";
 import EntityChurnScreen from "../entityChurn";
 import EntityOwnershipScreen from "../entityOwnership";
+import EntityEffortScreen from "../entityEffort";
 
 export default () => (
     <div>
@@ -50,6 +51,7 @@ export default () => (
         />
         <Route
             path={"/entityEffort"}
+            component={EntityEffortScreen}
         />
     </div>
 );
