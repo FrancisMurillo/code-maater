@@ -15,8 +15,6 @@ import {
     refreshData
 } from "./Action";
 
-export {reducer};
-
 const DatePicker = styled(Input).attrs({"type": "date"})`
   margin-left: 10px;
   margin-right: 10px;
@@ -88,6 +86,8 @@ const appToolbarSelector = (state) => ({
     ...toolbarSelector(state),
     ...appSelector(state)
 });
+
+export {reducer, refreshData};
 
 export default connect(
     appToolbarSelector,

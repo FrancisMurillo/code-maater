@@ -1,5 +1,6 @@
 import {
-    reducer as appReducer
+    reducer as appReducer,
+    requestReducer as appRequestReducer
 } from "./Application";
 import {
     Provider as InternalizationProvider,
@@ -19,6 +20,7 @@ import {
 
 export {
     appReducer,
+    appRequestReducer,
     internalizationReducer,
     InternalizationProvider,
     PersistenceProvider,

@@ -30,12 +30,26 @@ export default (options) => {
         class RequestContainer extends React.Component {
             componentWillMount() {
                 if (!this.props._requestProps.registered) {
-                    this.props._request.onMount(this.props);
+                    this.props._request.onRegister(this.props);
                 }
             }
 
             componentDidMount() {
-                this.props._request.onMounted(this.props);
+                this.props._request.onFetch(this.props);
+            }
+
+            componentWillUpdate(nextProps) {
+                if (!nextProps._requestProps.registered) {
+                    this.props._request.onRegister(nextProps);
+                }
+            }
+
+            componentDidUpdate() {
+                if (this.props._requestProps.registered &&
+                    this.props._requestProps.empty &&
+                    !this.props._requestProps.fetching) {
+                    this.props._request.onFetch(this.props);
+                }
             }
 
             render() {
@@ -70,10 +84,10 @@ export default (options) => {
             }),
             (dispatch) => ({
                 "_request": {
-                    "onMount": (_currentProps) => {
+                    "onRegister": (_currentProps) => {
                         dispatch(registerRequest(key, {initialData}));
                     },
-                    "onMounted": (currentProps) => {
+                    "onFetch": (currentProps) => {
                         dispatch(fetchData(key, ...currentProps._fetchArgs));
 
                         const fetchRequest = fetch(...currentProps._fetchArgs);

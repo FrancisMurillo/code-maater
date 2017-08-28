@@ -90,7 +90,13 @@ const normalizeRecordKeys = (normalizer) => (records) =>
 const Grid = injectIntl(class BaseGrid extends React.Component {
     componentWillMount() {
         if (!this.props._gridProps.registered) {
-            this.props._grid.onMount(this.props);
+            this.props._grid.onRegister(this.props);
+        }
+    }
+
+    componentWillUpdate(nextProps) {
+        if (!nextProps._gridProps.registered) {
+            this.props._grid.onRegister(nextProps);
         }
     }
 
@@ -153,7 +159,7 @@ export default connect(
     (state, props) => ({"_gridProps": gridSelector(props.gridKey)(state)}),
     (dispatch, props) => ({
         "_grid": {
-            "onMount": (_currentProps) =>
+            "onRegister": (_currentProps) =>
                 dispatch(registerGrid(props.gridKey)),
             "onSort": (column, direction) =>
                 dispatch(sortColumn(props.gridKey, column, direction)),

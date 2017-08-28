@@ -2,6 +2,7 @@ import {handleActions} from "redux-actions";
 
 import {requestKey} from "../App";
 import {receiveData} from "../request";
+import {refreshData} from "../toolbar";
 
 const initialState = {
     "minDate": null,
@@ -21,3 +22,11 @@ export const reducer = handleActions({
         }
     }
 }, initialState);
+
+export const requestReducer = handleActions({
+    [refreshData]: (state, _action) => ({
+        ...state,
+        "request": {"app": state.request.app},
+        "grid": {}
+    })
+}, {});

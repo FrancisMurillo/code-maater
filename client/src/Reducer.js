@@ -2,6 +2,7 @@ import {combineReducers} from "redux";
 
 import {
     appReducer,
+    appRequestReducer,
     internalizationReducer,
     routingReducer
 } from "./app";
@@ -11,13 +12,23 @@ import {reducer as gridReducer} from "./grid";
 import {reducer as requestReducer} from "./request";
 import {reducer as toolbarReducer} from "./toolbar";
 
-export default combineReducers({
-    "app": appReducer,
-    "drawer": drawerReducer,
-    "frame": frameReducer,
-    "grid": gridReducer,
-    "intl": internalizationReducer,
-    "request": requestReducer,
-    "router": routingReducer,
-    "toolbar": toolbarReducer
-});
+export const joinReducers = (...reducers) => {
+    return (state, action) => {
+        return reducers.reduce((prevState, reducer) => {
+            return reducer(prevState, action);
+        }, state);
+    };
+};
+
+export default joinReducers(
+    combineReducers({
+        "app": appReducer,
+        "drawer": drawerReducer,
+        "frame": frameReducer,
+        "grid": gridReducer,
+        "intl": internalizationReducer,
+        "request": requestReducer,
+        "router": routingReducer,
+        "toolbar": toolbarReducer
+    }),
+    appRequestReducer);
