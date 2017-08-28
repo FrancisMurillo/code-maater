@@ -3,7 +3,12 @@ import {connect} from "react-redux";
 import {injectIntl} from "react-intl";
 import BaseDrawer from "material-ui/Drawer";
 import Divider from "material-ui/Divider";
-import BaseList, {ListItem, ListItemIcon, ListItemText} from "material-ui/List";
+import BaseList, {
+    ListItem,
+    ListItemIcon,
+    ListItemText,
+    ListSubheader
+} from "material-ui/List";
 import DashboardIcon from "material-ui-icons/Dashboard";
 import SummaryIcon from "material-ui-icons/TrackChanges";
 import RevisionIcon from "material-ui-icons/LinearScale";
@@ -26,6 +31,10 @@ const MenuList = styled(BaseList).attrs({"disablePadding": true})`
   flex: initial;
   overflow-y: hidden;
 `;
+
+const MenuSubHeader = injectIntl(({intl, label}) => (
+    <ListSubheader>{intl.formatMessage(label)}</ListSubheader>
+));
 
 const MenuDivider = styled(Divider).attrs({"inset": false})``;
 
@@ -56,7 +65,9 @@ const AppDrawer = ({
         open={open}
         onRequestClose={onRequestClose}
     >
-        <MenuList>
+        <MenuList
+            subheader={(<MenuSubHeader label={messages.project} />)}
+        >
             <MenuItem
                 icon={DashboardIcon}
                 label={messages.dashboard}
@@ -64,7 +75,9 @@ const AppDrawer = ({
             />
         </MenuList>
         <MenuDivider />
-        <MenuList>
+        <MenuList
+            subheader={(<MenuSubHeader label={messages.codeMaat} />)}
+        >
             <MenuItem
                 icon={SummaryIcon}
                 label={messages.summary}
@@ -112,7 +125,9 @@ const AppDrawer = ({
             />
         </MenuList>
         <MenuDivider />
-        <MenuList>
+        <MenuList
+            subheader={(<MenuSubHeader label={messages.preference} />)}
+        >
             <MenuItem
                 icon={SettingIcon}
                 label={messages.setting}

@@ -1,10 +1,20 @@
 import {defineMessages} from "react-intl";
 
 export default defineMessages({
+    "project": {
+        "id": "drawer.project",
+        "description": "Menu header for project section",
+        "defaultMessage": "Project"
+    },
     "dashboard": {
         "id": "drawer.dashboard",
         "description": "Menu label for dashboard",
         "defaultMessage": "Dashboard"
+    },
+    "codeMaat": {
+        "id": "drawer.codeMaat",
+        "description": "Menu header for code maat section",
+        "defaultMessage": "Code Maat"
     },
     "summary": {
         "id": "drawer.summary",
@@ -51,9 +61,14 @@ export default defineMessages({
         "description": "Menu label for entity effort",
         "defaultMessage": "Entity Effort"
     },
+    "preference": {
+        "id": "drawer.preference",
+        "description": "Menu label for prefernces section",
+        "defaultMessage": "Preferences"
+    },
     "setting": {
         "id": "drawer.setting",
-        "description": "Menu label for setting",
+        "description": "Menu header for setting section",
         "defaultMessage": "Setting"
     }
 });
