@@ -55,7 +55,7 @@ const TabContainer = injectIntl(class BaseTab extends React.Component {
                             );
                         })}
                     </TabsContainer>
-                    {this.props.children}
+                    {React.Children.toArray(this.props.children)[tabIndex]}
                 </div>
             );
         } else {
